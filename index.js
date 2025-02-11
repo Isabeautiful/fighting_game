@@ -32,7 +32,7 @@ class Sprite {
     if(this.position.y + this.height + this.velocity.y >= canvas.height){
       this.velocity.y = 0;
     }
-    else{
+    else{ //só aplica gravidade quando ele está fora do chão
       this.velocity.y += gravity;
     }
   }
