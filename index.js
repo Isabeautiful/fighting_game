@@ -18,6 +18,7 @@ class Sprite {
     this.velocity = velocity;
     this.height = 150;
     this.lastKey;
+    this.isJumping = false;
   }
 
   draw(){
@@ -35,6 +36,7 @@ class Sprite {
     //ele não cai mais pois está no chão
     if(this.position.y + this.height + this.velocity.y >= canvas.height){
       this.velocity.y = 0;
+      this.isJumping = false;
     }
     else{ //só aplica gravidade quando ele está fora do chão
       this.velocity.y += GRAVITY;
@@ -126,8 +128,13 @@ window.addEventListener("keydown", (event)=>{
       player.lastKey = 'a';
     break;
     case 'w':
-      player.velocity.y = -STRENGHT_J;
+      if(!player.isJumping){
+        player.velocity.y = -STRENGHT_J;
+        player.isJumping = true;
+      }
     break;
+
+    // Enemy
     case 'ArrowRight':
       keys.ArrowRight.pressed = true;
       enemy.lastKey = 'ArrowRight';
@@ -137,7 +144,10 @@ window.addEventListener("keydown", (event)=>{
       enemy.lastKey = 'ArrowLeft';
     break;
     case 'ArrowUp':
-      enemy.velocity.y = -STRENGHT_J;
+      if(!enemy.isJumping){
+        enemy.velocity.y = -STRENGHT_J;
+        enemy.isJumping = true;
+      }
     break;
   }
 })
