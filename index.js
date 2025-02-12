@@ -13,17 +13,32 @@ const STRENGHT_J = 20;
 
 ///creating a sprite class for players and enemies
 class Sprite {
-  constructor({position, velocity}) {
+  constructor({position, velocity, color = 'red'}) {
     this.position = position;
     this.velocity = velocity;
+    this.width = 50;
     this.height = 150;
     this.lastKey;
     this.isJumping = false;
+    this.isAttacking = false;
+    this.attackBox = {
+      position: this.position,
+      width: 100,
+      height: 50
+    }
+    this.color = color;
   }
 
   draw(){
-    c.fillStyle = 'red';
-    c.fillRect(this.position.x, this.position.y, 50, this.height)
+    c.fillStyle = this.color;
+    c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+    //attack box
+    if(this.isAttacking){
+      c.fillStyle = 'green';
+
+      c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+    }
   }
 
   update(){
@@ -42,7 +57,15 @@ class Sprite {
       this.velocity.y += GRAVITY;
     }
   }
+  attack(){
+    this.isAttacking = true;
+    setTimeout(()=>{
+      this.isAttacking = false
+    }, 100)
+  }
 }
+
+
 
 //create player
 const player = new Sprite({
@@ -65,7 +88,8 @@ const enemy = new Sprite({
   velocity: {
     x: 0,
     y: 0
-  }
+  },
+  color: 'blue'
 })
 
 const keys = {
@@ -113,6 +137,17 @@ function animate(){
   } else if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
     enemy.velocity.x = -SPEED;
   }
+
+  //detect for collision
+  if(player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
+    player.attackBox.position.x <= enemy.position.x + enemy.width &&
+  player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
+  player.attackBox.position.y <= enemy.position.y + enemy.height &&
+  player.isAttacking)
+  {
+    player.isAttacking = false;
+    console.log('hit');
+  }
 }
 
 animate();
@@ -132,6 +167,9 @@ window.addEventListener("keydown", (event)=>{
         player.velocity.y = -STRENGHT_J;
         player.isJumping = true;
       }
+    break;
+    case ' ':
+      player.attack();
     break;
 
     // Enemy
