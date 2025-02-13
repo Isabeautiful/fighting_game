@@ -1,5 +1,5 @@
 import { Sprite } from './sprite.js';
-import { animate } from './animate.js';
+import { animate, decreaseTimer } from './animate.js';
 
 export const canvas = document.querySelector('canvas');
 export const c = canvas.getContext('2d'); //canvas context
@@ -49,3 +49,5 @@ export const enemy = new Sprite({
 })
 
 animate();
+
+decreaseTimer();
