@@ -1,8 +1,8 @@
-import { Sprite } from './sprite.js';
-import { animate, decreaseTimer, timerId, timer } from './animate.js';
+import { Sprite } from "./sprite.js";
+import { animate, decreaseTimer, timerId, timer } from "./animate.js";
 
-export const canvas = document.querySelector('canvas');
-export const c = canvas.getContext('2d'); //canvas context
+export const canvas = document.querySelector("canvas");
+export const c = canvas.getContext("2d"); //canvas context
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -17,14 +17,13 @@ export const OFFSET_C = -50;
 
 export let isPaused = false;
 
-export function pauseGame(pause){
+export function pauseGame(pause) {
   isPaused = pause;
 
-  if(isPaused){
+  if (isPaused) {
     clearTimeout(timerId);
-  }
-  else{
-    if(timer > 0){
+  } else {
+    if (timer > 0) {
       decreaseTimer();
     }
   }
@@ -34,34 +33,34 @@ export function pauseGame(pause){
 export const player = new Sprite({
   position: {
     x: 0,
-    y: 0
+    y: 0,
   },
   velocity: {
     x: 0,
-    y: 0
+    y: 0,
   },
   offset: {
     x: 0,
-    y: 0
-  }
-})
+    y: 0,
+  },
+});
 
 //create enemy
 export const enemy = new Sprite({
   position: {
     x: canvas.width - 50, //width of the enemy
-    y: 0
+    y: 0,
   },
   velocity: {
     x: 0,
-    y: 0
+    y: 0,
   },
-  color: 'blue',
+  color: "blue",
   offset: {
     x: OFFSET_C,
-    y: 0
-  }
-})
+    y: 0,
+  },
+});
 
 animate();
 

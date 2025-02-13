@@ -1,4 +1,4 @@
-import { STRENGHT_J, player, enemy, pauseGame, isPaused } from "./index.js";
+import { STRENGHT_J, player, pauseGame, isPaused } from "./index.js";
 
 export const keys = {
   a: { pressed: false },
@@ -16,41 +16,22 @@ window.addEventListener("keydown", (event) => {
   }
 
   switch (event.key) {
-    case "d":
-      keys.d.pressed = true;
-      player.lastKey = "d";
-      break;
-    case "a":
-      keys.a.pressed = true;
-      player.lastKey = "a";
-      break;
-    case "w":
-      if (!player.isJumping) {
-        player.velocity.y = -STRENGHT_J;
-        player.isJumping = true;
-      }
-      break;
     case " ":
       player.attack();
       break;
 
-    // Enemy
+    case "ArrowUp":
+      player.jump();
+      break;
+
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
-      enemy.lastKey = "ArrowRight";
+      player.lastKey = "ArrowRight";
       break;
+
     case "ArrowLeft":
       keys.ArrowLeft.pressed = true;
-      enemy.lastKey = "ArrowLeft";
-      break;
-    case "ArrowUp":
-      if (!enemy.isJumping) {
-        enemy.velocity.y = -STRENGHT_J;
-        enemy.isJumping = true;
-      }
-      break;
-    case "ArrowDown":
-      enemy.attack();
+      player.lastKey = "ArrowLeft";
       break;
 
     case "Escape":
