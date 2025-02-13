@@ -1,5 +1,5 @@
 import { Sprite } from './sprite.js';
-import { animate, decreaseTimer } from './animate.js';
+import { animate, decreaseTimer, timerId, timer } from './animate.js';
 
 export const canvas = document.querySelector('canvas');
 export const c = canvas.getContext('2d'); //canvas context
@@ -14,6 +14,21 @@ export const GRAVITY = 0.7;
 export const SPEED = 5;
 export const STRENGHT_J = 20;
 export const OFFSET_C = -50;
+
+export let isPaused = false;
+
+export function pauseGame(pause){
+  isPaused = pause;
+
+  if(isPaused){
+    clearTimeout(timerId);
+  }
+  else{
+    if(timer > 0){
+      decreaseTimer();
+    }
+  }
+}
 
 //create player
 export const player = new Sprite({

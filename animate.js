@@ -1,12 +1,13 @@
-import { STRENGHT_J, SPEED, GRAVITY, player, enemy, canvas, c } from './index.js';
+import { SPEED, player, enemy, canvas, c, isPaused, pauseGame } from './index.js';
 import { keys } from './keys.js';
 import { rectangularCollision, handleAttackBoxOffset } from './collision.js';
 
-let timer = 10;
-let timerId;
+export let timer = 10;
+export let timerId;
 
 function determineWinner({player, enemy, timerId}){
-  clearTimeout(timerId);
+  clearTimeout(timerId); //Stop the timer
+
   let result = document.querySelector('#result');
   result.style.display = 'flex';
 
@@ -19,9 +20,14 @@ function determineWinner({player, enemy, timerId}){
   else{
     result.innerHTML = 'Enemy Won';
   }
+  pauseGame(true);
 }
 
 export function decreaseTimer(){
+  if(isPaused){
+    return;
+  }
+
   if(timer > 0){
     timerId = setTimeout(decreaseTimer, 1000);
     timer--;
@@ -36,6 +42,11 @@ export function decreaseTimer(){
 //animate the entire canvas
 export function animate(){
   window.requestAnimationFrame(animate);
+
+  //if the game is paused, we don't continue to render the game
+  if(isPaused){
+    return;
+  }
   
   c.fillStyle = 'black';
   c.fillRect(0,0, canvas.width, canvas.height);
