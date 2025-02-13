@@ -1,6 +1,6 @@
 import { STRENGHT_J, SPEED, GRAVITY, player, enemy, canvas, c } from './index.js';
 import { keys } from './keys.js';
-import { rectangularCollision } from './collision.js';
+import { rectangularCollision, handleAttackBoxOffset } from './collision.js';
 
 //animate the entire canvas
 export function animate(){
@@ -26,6 +26,9 @@ export function animate(){
   } else if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
     enemy.velocity.x = -SPEED;
   }
+
+  //check offset
+  handleAttackBoxOffset(player,enemy);
 
   //detect for collision
   if(rectangularCollision({

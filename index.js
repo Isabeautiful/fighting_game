@@ -13,6 +13,7 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 export const GRAVITY = 0.7;
 export const SPEED = 5;
 export const STRENGHT_J = 20;
+export const OFFSET_C = -50;
 
 //create player
 export const player = new Sprite({
@@ -33,8 +34,8 @@ export const player = new Sprite({
 //create enemy
 export const enemy = new Sprite({
   position: {
-    x: 400,
-    y: 100
+    x: canvas.width - 50, //width of the enemy
+    y: 0
   },
   velocity: {
     x: 0,
@@ -42,7 +43,7 @@ export const enemy = new Sprite({
   },
   color: 'blue',
   offset: {
-    x: -50,
+    x: OFFSET_C,
     y: 0
   }
 })
