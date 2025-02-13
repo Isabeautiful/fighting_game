@@ -1,4 +1,4 @@
-import { STRENGHT_J, SPEED, GRAVITY, canvas, c } from "./index.js";
+import { STRENGHT_J, GRAVITY, canvas, c } from "./index.js";
 ///creating a sprite class for players and enemies
 export class Sprite {
   constructor({ position, velocity, color = "red", offset }) {

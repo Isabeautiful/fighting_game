@@ -1,4 +1,4 @@
-import { STRENGHT_J, player, pauseGame, isPaused } from "./index.js";
+import { player, pauseGame, isPaused } from "./index.js";
 
 export const keys = {
   a: { pressed: false },
