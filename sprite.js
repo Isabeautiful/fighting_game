@@ -9,6 +9,7 @@ export class Sprite {
     this.lastKey;
     this.isJumping = false;
     this.isAttacking = false;
+    this.health = 100;
     this.attackBox = {
       position: {
         x: this.position.x,

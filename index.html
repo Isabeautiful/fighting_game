@@ -1,14 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fighting game</title>
-  <!--game will be 1024 x 576-->
-</head>
-<body>
-  <canvas>
-  </canvas>
-</body>
-<script type="module" src="index.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fighting game</title>
+    <!--game will be 1024 x 576-->
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      #timer {
+        background-color: red;
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="canvas-container"
+      style="position: relative; display: inline-block"
+    >
+      <div
+        id="UI-container"
+        style="
+          position: absolute;
+          display: flex;
+          width: 100%;
+          align-items: center;
+        "
+      >
+        <div
+          id="player-health-container"
+          style="position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;"
+        >
+          <div
+            id="player-health"
+            style="background-color: yellow; height: 30px; width: 100%;"
+          ></div>
+          <div
+            id="player-health-H"
+            style="
+              position: absolute;
+              background: rgb(255, 0, 0);
+              top: 0;
+              right: 0;
+              bottom: 0;
+              width: 100%;
+            "
+          ></div>
+        </div>
+
+        <div id="timer"></div>
+
+        <div
+          id="enemy-health-container"
+          style="position: relative; height: 30px; width: 100%"
+        >
+          <div
+            id="enemy-health"
+            style="background-color: yellow; height: 30px"
+          ></div>
+          <div
+            id="enemy-health-H"
+            style="
+              position: absolute;
+              background: blue;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            "
+          ></div>
+        </div>
+      </div>
+      <canvas> </canvas>
+    </div>
+  </body>
+  <script type="module" src="index.js"></script>
 </html>

@@ -38,7 +38,8 @@ export function animate(){
   player.isAttacking)
   {
     player.isAttacking = false;
-    console.log('hit');
+    enemy.health -= 20;
+    document.querySelector('#enemy-health-H').style.width = enemy.health + '%';
   }
 
   if(rectangularCollision({
@@ -48,6 +49,7 @@ export function animate(){
   enemy.isAttacking)
   {
     enemy.isAttacking = false;
-    console.log('hitE');
+    player.health -= 20;
+    document.querySelector('#player-health-H').style.width = player.health + '%';
   }
 }
