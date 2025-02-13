@@ -14,7 +14,7 @@ export function rectangularCollision({
 
 export function handleAttackBoxOffset(sprite1, sprite2){
   //Verificação do sprite 1
-  if(sprite1.position.x <= sprite2.position.x + sprite2.width){
+  if(sprite1.position.x <= sprite2.position.x){
     sprite1.attackBox.offset.x = 0; //offset padrão, ataque para a direita
   }
   else{
@@ -22,7 +22,7 @@ export function handleAttackBoxOffset(sprite1, sprite2){
   }
 
   //Verificação do sprite 2
-  if(sprite2.position.x <= sprite1.position.x + sprite2.width){
+  if(sprite2.position.x <= sprite1.position.x){
     sprite2.attackBox.offset.x = 0;
   }
   else{
