@@ -11,7 +11,7 @@ import { keys } from "./keys.js";
 import { rectangularCollision, handleAttackBoxOffset } from "./collision.js";
 import { enemyAI } from "./enemy.js";
 
-export let timer = 60;
+export let timer = 30;
 export let timerId;
 
 function determineWinner({ player, enemy, timerId }) {
