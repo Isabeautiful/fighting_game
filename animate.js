@@ -3,6 +3,8 @@ import {
   player,
   enemy,
   canvas,
+  background,
+  shop,
   c,
   isPaused,
   pauseGame,
@@ -59,6 +61,9 @@ export function animate() {
 
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
+
+  background.update();
+  shop.update();
 
   player.update();
   enemy.update();

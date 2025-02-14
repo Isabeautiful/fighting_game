@@ -1,4 +1,4 @@
-import { Sprite } from "./sprite.js";
+import { Sprite, Fighter } from "./sprite.js";
 import { animate, decreaseTimer, timerId, timer } from "./animate.js";
 
 export const canvas = document.querySelector("canvas");
@@ -29,8 +29,28 @@ export function pauseGame(pause) {
   }
 }
 
+//background
+export const background = new Sprite({
+  position: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: "./img/background.png"
+})
+
+//shop background
+export const shop = new Sprite({
+  position: {
+    x: 600,
+    y: 129
+  },
+  imageSrc: "./img/shop.png",
+  scale: 2.75,
+  framesMax: 6
+})
+
 //create player
-export const player = new Sprite({
+export const player = new Fighter({
   position: {
     x: 0,
     y: 0,
@@ -46,7 +66,7 @@ export const player = new Sprite({
 });
 
 //create enemy
-export const enemy = new Sprite({
+export const enemy = new Fighter({
   position: {
     x: canvas.width - 50, //width of the enemy
     y: 0,
