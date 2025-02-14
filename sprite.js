@@ -1,6 +1,30 @@
 import { STRENGHT_J, GRAVITY, canvas, c } from "./index.js";
-///creating a sprite class for players and enemies
+
+///creating a sprite class
 export class Sprite {
+  constructor({ position, imageSrc }) {
+    this.position = position;
+    this.width = 50;
+    this.height = 150;
+
+    this.image = new Image();
+    this.image.onload = () => {}
+    this.image.src = imageSrc;
+  }
+
+  draw() {
+    c.drawImage(this.image, this.position.x, this.position.y);
+  }
+
+  update() {
+    this.draw();
+  }
+}
+
+
+
+///creating a Fighter class for players and enemies
+export class Fighter {
   constructor({ position, velocity, color = "red", offset }) {
     this.position = position;
     this.velocity = velocity;
