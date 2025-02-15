@@ -69,7 +69,7 @@ export class Fighter extends Sprite {
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
-    sprites
+    sprites,
   }) {
     //calls constructor of the parent (sprite)
     super({
@@ -103,7 +103,7 @@ export class Fighter extends Sprite {
     this.framesElapsed = 0;
     this.framesHold = 5;
 
-    for(const sprite in this.sprites){
+    for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
@@ -124,6 +124,7 @@ export class Fighter extends Sprite {
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
       this.isJumping = false;
+      this.position.y = 330; //bug fix, console.log(this.position.y)
     } else {
       //só aplica gravidade quando ele está fora do chão
       this.velocity.y += GRAVITY;
@@ -141,6 +142,43 @@ export class Fighter extends Sprite {
     if (!this.isJumping) {
       this.velocity.y = -STRENGHT_J;
       this.isJumping = true;
+    }
+  }
+
+  switchSprite(sprite) {
+    switch (sprite) {
+      case "idle":
+        if (this.image !== this.sprites.idle.image) {
+          this.image = this.sprites.idle.image;
+          this.framesMax = this.sprites.idle.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
+      case "run":
+        if (this.image !== this.sprites.run.image) {
+          this.image = this.sprites.run.image;
+          this.framesMax = this.sprites.run.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
+      case "jump":
+        if (this.image !== this.sprites.jump.image) {
+          this.image = this.sprites.jump.image;
+          this.framesMax = this.sprites.jump.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
+      case "fall":
+        if (this.image !== this.sprites.fall.image) {
+          this.image = this.sprites.fall.image;
+          this.framesMax = this.sprites.fall.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
     }
   }
 }

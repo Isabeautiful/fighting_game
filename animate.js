@@ -73,16 +73,23 @@ export function animate() {
 
   player.velocity.x = 0;
 
-  //idle é a animação padrão
-  player.image = player.sprites.idle.image;
-
   if (keys.ArrowLeft.pressed && player.lastKey === "ArrowLeft") {
     player.velocity.x = -SPEED;
-    player.image = player.sprites.run.image;
+    player.switchSprite('run');
   } else if (keys.ArrowRight.pressed && player.lastKey === "ArrowRight") {
     player.velocity.x = SPEED;
-    player.image = player.sprites.run.image;
+    player.switchSprite('run');
+  } else{ //idle é a animação padrão, só ocorre quando não pressionamos teclas de movimento
+    player.switchSprite('idle');
   }
+
+  //jump sprite
+  if(player.velocity.y < 0){ ///currently on air
+    player.switchSprite('jump');
+  }
+  else if(player.velocity.y > 0){
+    player.switchSprite('fall');
+  } //falling
 
   //check offset
   handleAttackBoxOffset(player, enemy);
