@@ -92,7 +92,7 @@ export function animate() {
   } //falling
 
   //check offset
-  handleAttackBoxOffset(player, enemy);
+  //handleAttackBoxOffset({player, enemy});
 
   //detect for collision
   if (
@@ -100,24 +100,35 @@ export function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking && player.currentFrame === 4
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
     document.querySelector("#enemy-health-H").style.width = enemy.health + "%";
   }
 
+  //if player misses
+  if (player.isAttacking && player.currentFrame === 4){
+    player.isAttacking = false;
+  }
+
+  //enemy collision detection:
   if (
     rectangularCollision({
       rectangle1: enemy,
       rectangle2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking && enemy.currentFrame === 2
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#player-health-H").style.width =
       player.health + "%";
+  }
+
+  //if enemy misses
+  if (enemy.isAttacking && enemy.currentFrame === 2){
+    enemy.isAttacking = false;
   }
 
   //end the game based on health

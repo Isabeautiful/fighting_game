@@ -13,7 +13,7 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 export const GRAVITY = 0.7;
 export const SPEED = 5;
 export const STRENGHT_J = 20;
-export const OFFSET_C = -50;
+export const OFFSET_C = 170;
 
 export let isPaused = false;
 
@@ -67,7 +67,7 @@ export const player = new Fighter({
   framesMax: 8,
   scale: 2.5,
   offset: {
-    x: 250,
+    x: 220,
     y: 157
   },
   sprites: {
@@ -91,13 +91,21 @@ export const player = new Fighter({
       imageSrc: './img/samuraiMack/Attack1.png',
       framesMax: 6
     },
+  },
+  attackBox: {
+    offset: {
+      x: 50,
+      y: 50
+    },
+    width: 170,
+    height: 50
   }
 });
 
 //create enemy
 export const enemy = new Fighter({
   position: {
-    x: canvas.width - 400, //width of the enemy
+    x: canvas.width - 100, //width of the enemy = 50
     y: 0,
   },
   velocity: {
@@ -106,14 +114,14 @@ export const enemy = new Fighter({
   },
   color: "blue",
   offset: {
-    x: OFFSET_C,
+    x: 0,
     y: 0,
   },
   imageSrc: './img/kenji/Idle.png',
   framesMax: 4,
   scale: 2.5,
   offset: {
-    x: 250,
+    x: 220,
     y: 167
   },
   sprites: {
@@ -137,6 +145,14 @@ export const enemy = new Fighter({
       imageSrc: './img/kenji/Attack1.png',
       framesMax: 4
     },
+  },
+  attackBox: {
+    offset: {
+      x: -OFFSET_C,
+      y: 50
+    },
+    width: OFFSET_C,
+    height: 50
   }
 });
 

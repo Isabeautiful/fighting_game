@@ -1,7 +1,7 @@
 import { enemy, player, SPEED, STRENGHT_J } from "./index.js";
 
 const E_ATTACK_COOLDOWN_TIME = 1500; // 1.5s
-const DISTANCE_ARM = 50;
+const DISTANCE_ARM = 170;
 let enemyAttackCooldown = 0; //Cooldown of the Attack
 let hasAttacked = false;
 
