@@ -73,10 +73,15 @@ export function animate() {
 
   player.velocity.x = 0;
 
+  //idle é a animação padrão
+  player.image = player.sprites.idle.image;
+
   if (keys.ArrowLeft.pressed && player.lastKey === "ArrowLeft") {
     player.velocity.x = -SPEED;
+    player.image = player.sprites.run.image;
   } else if (keys.ArrowRight.pressed && player.lastKey === "ArrowRight") {
     player.velocity.x = SPEED;
+    player.image = player.sprites.run.image;
   }
 
   //check offset

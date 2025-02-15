@@ -69,6 +69,7 @@ export class Fighter extends Sprite {
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
+    sprites
   }) {
     //calls constructor of the parent (sprite)
     super({
@@ -96,10 +97,16 @@ export class Fighter extends Sprite {
     };
     this.color = color;
 
+    this.sprites = sprites;
     //Properties of sprite
     this.currentFrame = 0;
     this.framesElapsed = 0;
     this.framesHold = 5;
+
+    for(const sprite in this.sprites){
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
+    }
   }
 
   update() {
