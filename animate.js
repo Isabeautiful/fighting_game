@@ -66,10 +66,10 @@ export function animate() {
   shop.update();
 
   player.update();
-  //enemy.update();
+  enemy.update();
 
   //Enemy AI
-  //enemyAI();
+  enemyAI();
 
   player.velocity.x = 0;
 

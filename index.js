@@ -97,7 +97,7 @@ export const player = new Fighter({
 //create enemy
 export const enemy = new Fighter({
   position: {
-    x: canvas.width - 50, //width of the enemy
+    x: canvas.width - 400, //width of the enemy
     y: 0,
   },
   velocity: {
@@ -109,6 +109,35 @@ export const enemy = new Fighter({
     x: OFFSET_C,
     y: 0,
   },
+  imageSrc: './img/kenji/Idle.png',
+  framesMax: 4,
+  scale: 2.5,
+  offset: {
+    x: 250,
+    y: 167
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/kenji/Idle.png',
+      framesMax: 4
+    },
+    run: {
+      imageSrc: './img/kenji/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/kenji/Jump.png',
+      framesMax: 2
+    },
+    fall: {
+      imageSrc: './img/kenji/Fall.png',
+      framesMax: 2
+    },
+    attack1: {
+      imageSrc: './img/kenji/Attack1.png',
+      framesMax: 4
+    },
+  }
 });
 
 animate();
