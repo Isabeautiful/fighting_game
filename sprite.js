@@ -155,7 +155,7 @@ export class Fighter extends Sprite {
   }
 
   takeHit(){
-    this.health -= 100;
+    this.health -= 20;
 
     //switch sprites based on health
   if (this.health <= 0) {

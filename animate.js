@@ -65,6 +65,9 @@ export function animate() {
   background.update();
   shop.update();
 
+  c.fillStyle = 'rgba(255,255,255, 0.15)';
+  c.fillRect(0,0,canvas.width, canvas.height);
+
   player.update();
   enemy.update();
 
@@ -119,7 +122,7 @@ export function animate() {
       rectangle1: enemy,
       rectangle2: player,
     }) &&
-    enemy.isAttacking && enemy.currentFrame === 2
+    enemy.isAttacking && enemy.currentFrame === 1
   ) {
     player.takeHit();
     enemy.isAttacking = false;
