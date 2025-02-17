@@ -73,8 +73,8 @@ export class Fighter extends Sprite {
     attackBox = {
       offset: {},
       width: undefined,
-      height: undefined
-    }
+      height: undefined,
+    },
   }) {
     //calls constructor of the parent (sprite)
     super({
@@ -121,13 +121,16 @@ export class Fighter extends Sprite {
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
-    
-    c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+    c.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
     /* Draws player hitbox
     c.fillStyle = this.color;
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
     */
-
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
@@ -145,8 +148,13 @@ export class Fighter extends Sprite {
   }
 
   attack() {
-    this.switchSprite('attack1');
+    this.switchSprite("attack1");
     this.isAttacking = true;
+  }
+
+  takeHit(){
+    this.switchSprite("takeHit");
+    this.health -= 20;
   }
 
   jump() {
@@ -157,8 +165,18 @@ export class Fighter extends Sprite {
   }
 
   switchSprite(sprite) {
-    if(this.image === this.sprites.attack1.image && 
-      this.currentFrame < this.sprites.attack1.framesMax - 1){
+    //override the other animations for the attack sprite
+    if (
+      this.image === this.sprites.attack1.image &&
+      this.currentFrame < this.sprites.attack1.framesMax - 1
+    ) {
+      return;
+    }
+    //override the other animations for the takeDamage sprite
+    if (
+      this.image === this.sprites.takeHit.image &&
+      this.currentFrame < this.sprites.takeHit.framesMax - 1
+    ) {
       return;
     }
 
@@ -199,6 +217,14 @@ export class Fighter extends Sprite {
         if (this.image !== this.sprites.attack1.image) {
           this.image = this.sprites.attack1.image;
           this.framesMax = this.sprites.attack1.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
+      case "takeHit":
+        if (this.image !== this.sprites.takeHit.image) {
+          this.image = this.sprites.takeHit.image;
+          this.framesMax = this.sprites.takeHit.framesMax;
 
           this.currentFrame = 0;
         }

@@ -80,7 +80,8 @@ export function animate() {
     player.velocity.x = SPEED;
     player.switchSprite('run');
   } else{ //idle é a animação padrão, só ocorre quando não pressionamos teclas de movimento
-    player.switchSprite('idle');
+    if(!player.isHit && !enemy.isHit)
+      player.switchSprite('idle');
   }
 
   //jump sprite
@@ -94,7 +95,7 @@ export function animate() {
   //check offset
   //handleAttackBoxOffset({player, enemy});
 
-  //detect for collision
+  //detect for collision: player hitting enemy
   if (
     rectangularCollision({
       rectangle1: player,
@@ -102,8 +103,8 @@ export function animate() {
     }) &&
     player.isAttacking && player.currentFrame === 4
   ) {
+    enemy.takeHit();
     player.isAttacking = false;
-    enemy.health -= 20;
     document.querySelector("#enemy-health-H").style.width = enemy.health + "%";
   }
 
@@ -112,7 +113,7 @@ export function animate() {
     player.isAttacking = false;
   }
 
-  //enemy collision detection:
+  //enemy collision detection: enemy hitting player
   if (
     rectangularCollision({
       rectangle1: enemy,
@@ -120,8 +121,8 @@ export function animate() {
     }) &&
     enemy.isAttacking && enemy.currentFrame === 2
   ) {
+    player.takeHit();
     enemy.isAttacking = false;
-    player.health -= 20;
     document.querySelector("#player-health-H").style.width =
       player.health + "%";
   }

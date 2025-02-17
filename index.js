@@ -91,6 +91,10 @@ export const player = new Fighter({
       imageSrc: './img/samuraiMack/Attack1.png',
       framesMax: 6
     },
+    takeHit: {
+      imageSrc: './img/samuraiMack/TakeHit-white-silhouette.png',
+      framesMax: 4
+    }
   },
   attackBox: {
     offset: {
@@ -145,6 +149,10 @@ export const enemy = new Fighter({
       imageSrc: './img/kenji/Attack1.png',
       framesMax: 4
     },
+    takeHit: {
+      imageSrc: './img/kenji/TakeHit.png',
+      framesMax: 3
+    }
   },
   attackBox: {
     offset: {
