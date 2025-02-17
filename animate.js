@@ -134,7 +134,8 @@ export function animate() {
 
   //end the game based on health
   if (enemy.health <= 0 || player.health <= 0) {
-    determineWinner({ player, enemy, timerId });
+    if(enemy.death === true || player.death === true)
+      setTimeout(determineWinner({ player, enemy, timerId }),10000);
   }
 }
 

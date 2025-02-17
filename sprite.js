@@ -101,6 +101,7 @@ export class Fighter extends Sprite {
       height: attackBox.height,
     };
     this.color = color;
+    this.dead = false;
 
     this.sprites = sprites;
     //Properties of sprite
@@ -116,7 +117,8 @@ export class Fighter extends Sprite {
 
   update() {
     this.draw();
-    this.animateFrames();
+    if(!this.dead)
+      this.animateFrames();
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
@@ -153,8 +155,14 @@ export class Fighter extends Sprite {
   }
 
   takeHit(){
+    this.health -= 100;
+
+    //switch sprites based on health
+  if (this.health <= 0) {
+    this.switchSprite("death");
+  } else{
     this.switchSprite("takeHit");
-    this.health -= 20;
+  }
   }
 
   jump() {
@@ -165,6 +173,12 @@ export class Fighter extends Sprite {
   }
 
   switchSprite(sprite) {
+    if(this.image === this.sprites.death.image){
+      if(this.currentFrame === this.sprites.death.framesMax - 1)
+        this.death = true;
+      return;
+    }
+
     //override the other animations for the attack sprite
     if (
       this.image === this.sprites.attack1.image &&
@@ -229,6 +243,14 @@ export class Fighter extends Sprite {
           this.currentFrame = 0;
         }
         break;
+        case "death":
+          if (this.image !== this.sprites.death.image) {
+            this.image = this.sprites.death.image;
+            this.framesMax = this.sprites.death.framesMax;
+  
+            this.currentFrame = 0;
+          }
+          break;
     }
   }
 }

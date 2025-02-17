@@ -15,29 +15,31 @@ window.addEventListener("keydown", (event) => {
     return;
   }
 
-  switch (event.key) {
-    case " ":
-      player.attack();
-      break;
+  if (!player.dead) {
+    switch (event.key) {
+      case " ":
+        player.attack();
+        break;
 
-    case "ArrowUp":
-      player.jump();
-      break;
+      case "ArrowUp":
+        player.jump();
+        break;
 
-    case "ArrowRight":
-      keys.ArrowRight.pressed = true;
-      player.lastKey = "ArrowRight";
-      break;
+      case "ArrowRight":
+        keys.ArrowRight.pressed = true;
+        player.lastKey = "ArrowRight";
+        break;
 
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = true;
-      player.lastKey = "ArrowLeft";
-      break;
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = true;
+        player.lastKey = "ArrowLeft";
+        break;
 
-    case "Escape":
-      keys.Escape.pressed = true;
-      pauseGame(!isPaused);
-      break;
+      case "Escape":
+        keys.Escape.pressed = true;
+        pauseGame(!isPaused);
+        break;
+    }
   }
 });
 
