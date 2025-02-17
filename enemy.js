@@ -1,13 +1,23 @@
 import { enemy, player, SPEED, STRENGHT_J } from "./index.js";
+import { timerId, determineWinner } from "./animate.js";
 
 const E_ATTACK_COOLDOWN_TIME = 1500; // 1.5s
 const DISTANCE_ARM = 170;
 let enemyAttackCooldown = 0; //Cooldown of the Attack
 let hasAttacked = false;
 
+function enemyDeath(){
+  if(enemy.health <= 0){
+    enemy.switchSprite('death');
+    if(enemy.death === true || player.death === true){
+      determineWinner({ player, enemy, timerId })
+    }
+  }
+}
+
 export function enemyAI() {
   const distanceToPlayer = player.position.x - enemy.position.x;
-
+  enemyDeath();
   if (!enemy.dead) {
     //Attack
     if (
@@ -19,6 +29,7 @@ export function enemyAI() {
       enemy.switchSprite("attack");
       enemyAttackCooldown = E_ATTACK_COOLDOWN_TIME; //INITIATE COOLDOWN
       hasAttacked = true;
+      enemyDeath();
       return;
     }
 

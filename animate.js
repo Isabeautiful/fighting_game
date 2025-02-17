@@ -16,7 +16,7 @@ import { enemyAI } from "./enemy.js";
 export let timer = 30;
 export let timerId;
 
-function determineWinner({ player, enemy, timerId }) {
+export function determineWinner({ player, enemy, timerId }) {
   clearTimeout(timerId); //Stop the timer
 
   let result = document.querySelector("#result");
@@ -135,7 +135,7 @@ export function animate() {
   //end the game based on health
   if (enemy.health <= 0 || player.health <= 0) {
     if(enemy.death === true || player.death === true)
-      setTimeout(determineWinner({ player, enemy, timerId }),10000);
+      determineWinner({ player, enemy, timerId });
   }
 }
 
