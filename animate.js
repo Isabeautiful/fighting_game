@@ -140,5 +140,24 @@ export function animate() {
     if(enemy.death === true || player.death === true)
       determineWinner({ player, enemy, timerId });
   }
+
+  
+  // Flip sprite based on position relative to the other fighter
+  //player flip
+  
+  if(player.position.x > enemy.position.x){
+    player.flip = true;
+  }
+  else{
+    player.flip = false;
+  }
+  //enemy flip
+  if(enemy.position.x < player.position.x){
+    enemy.flip = true;
+  }
+  else{
+    enemy.flip = false;
+  }
+  
 }
 

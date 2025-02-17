@@ -108,6 +108,7 @@ export class Fighter extends Sprite {
     this.currentFrame = 0;
     this.framesElapsed = 0;
     this.framesHold = 5;
+    this.flip = false;
 
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -115,12 +116,26 @@ export class Fighter extends Sprite {
     }
   }
 
+  draw() {
+    c.save(); // Salva o estado atual do contexto
+    if (this.flip) {
+      c.scale(-1, 1); // Flip horizontalmente
+      c.translate(-this.position.x * 2 - this.width, 0); // Ajusta a posição após o flip
+    }
+    super.draw();
+    c.restore(); // Restaura o estado do contexto
+  }
+
   update() {
     this.draw();
-    if(!this.dead)
-      this.animateFrames();
+    if (!this.dead) this.animateFrames();
 
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    // Ajusta a posição da attackBox com base no flip
+    if (this.flip) {
+      this.attackBox.position.x = this.position.x - this.attackBox.offset.x - this.attackBox.width;
+    } else {
+      this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    }
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
     c.fillRect(
@@ -129,7 +144,9 @@ export class Fighter extends Sprite {
       this.attackBox.width,
       this.attackBox.height
     );
-    /* Draws player hitbox
+
+    /* 
+    //Draws player hitbox (collision of player and enemy, for debuging)
     c.fillStyle = this.color;
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
     */
@@ -154,15 +171,15 @@ export class Fighter extends Sprite {
     this.isAttacking = true;
   }
 
-  takeHit(){
+  takeHit() {
     this.health -= 20;
 
     //switch sprites based on health
-  if (this.health <= 0) {
-    this.switchSprite("death");
-  } else{
-    this.switchSprite("takeHit");
-  }
+    if (this.health <= 0) {
+      this.switchSprite("death");
+    } else {
+      this.switchSprite("takeHit");
+    }
   }
 
   jump() {
@@ -173,8 +190,8 @@ export class Fighter extends Sprite {
   }
 
   switchSprite(sprite) {
-    if(this.image === this.sprites.death.image){
-      if(this.currentFrame === this.sprites.death.framesMax - 1)
+    if (this.image === this.sprites.death.image) {
+      if (this.currentFrame === this.sprites.death.framesMax - 1)
         this.death = true;
       return;
     }
@@ -243,14 +260,14 @@ export class Fighter extends Sprite {
           this.currentFrame = 0;
         }
         break;
-        case "death":
-          if (this.image !== this.sprites.death.image) {
-            this.image = this.sprites.death.image;
-            this.framesMax = this.sprites.death.framesMax;
-  
-            this.currentFrame = 0;
-          }
-          break;
+      case "death":
+        if (this.image !== this.sprites.death.image) {
+          this.image = this.sprites.death.image;
+          this.framesMax = this.sprites.death.framesMax;
+
+          this.currentFrame = 0;
+        }
+        break;
     }
   }
 }
