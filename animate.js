@@ -8,6 +8,7 @@ import {
   c,
   isPaused,
   pauseGame,
+  OFFSET_C,
 } from "./index.js";
 import { keys } from "./keys.js";
 import { rectangularCollision, handleAttackBoxOffset } from "./collision.js";
@@ -147,16 +148,20 @@ export function animate() {
   
   if(player.position.x > enemy.position.x){
     player.flip = true;
+    player.attackBox.offset.x = 0;
   }
   else{
     player.flip = false;
+    player.attackBox.offset.x = 50;
   }
   //enemy flip
   if(enemy.position.x < player.position.x){
     enemy.flip = true;
+    enemy.attackBox.offset.x = -210;
   }
   else{
     enemy.flip = false;
+    enemy.attackBox.offset.x = -OFFSET_C;
   }
   
 }

@@ -102,7 +102,7 @@ export const player = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 50,
+      x: 50, //when flipped, is 0
       y: 50
     },
     width: 170,
@@ -113,7 +113,7 @@ export const player = new Fighter({
 //create enemy
 export const enemy = new Fighter({
   position: {
-    x: canvas.width - 100, //width of the enemy = 50
+    x: canvas.width - 50, //width of the enemy = 50
     y: 0,
   },
   velocity: {

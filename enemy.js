@@ -2,7 +2,7 @@ import { enemy, player, SPEED, STRENGHT_J } from "./index.js";
 import { timerId, determineWinner } from "./animate.js";
 
 const E_ATTACK_COOLDOWN_TIME = 1500; // 1.5s
-const DISTANCE_ARM = 170;
+let DISTANCE_ARM = 170; //width of the attackbox
 let enemyAttackCooldown = 0; //Cooldown of the Attack
 let hasAttacked = false;
 
@@ -17,6 +17,8 @@ function enemyDeath(){
 
 export function enemyAI() {
   const distanceToPlayer = player.position.x - enemy.position.x;
+  DISTANCE_ARM = - enemy.attackBox.offset.x + 1;
+
   enemyDeath();
   if (!enemy.dead) {
     //Attack

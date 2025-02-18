@@ -137,7 +137,8 @@ export class Fighter extends Sprite {
       this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     }
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-
+    /*
+    //attackbox hitbox (for debuging) 
     c.fillRect(
       this.attackBox.position.x,
       this.attackBox.position.y,
@@ -145,7 +146,7 @@ export class Fighter extends Sprite {
       this.attackBox.height
     );
 
-    /* 
+    
     //Draws player hitbox (collision of player and enemy, for debuging)
     c.fillStyle = this.color;
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -153,6 +154,14 @@ export class Fighter extends Sprite {
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+
+    // Boundary checks: Impede que o jogador saia do canvas
+    if (this.position.x < 0) {
+      this.position.x = 0; // Impede que o jogador saia pela borda esquerda do canvas
+    } else if (this.position.x + this.width > canvas.width) {
+      this.position.x = canvas.width - this.width; // Impede que o jogador saia pela borda direita do canvas
+    }
+
     //this.position.y + this.height é o pé do personagem
     //se o pé do personagem + a altura que ele ta do chão é maior ou igual que o fim do canvas
     //ele não cai mais pois está no chão, chão antes era canvas.height, agora é canvas.height - 96px pq o chão fica ali
