@@ -150,8 +150,8 @@ export function animate() {
 
   //end the game based on health
   if (enemy.health <= 0 || player.health <= 0) {
-    if (enemy.death === true || player.death === true)
-      determineWinner({ player, enemy, timerId });
+    if(enemy.health <= 0) enemy.switchSprite('death');
+    if(player.health <= 0) player.switchSprite('death');
   }
 
   // Flip sprite based on position relative to the other fighter

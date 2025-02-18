@@ -1,4 +1,5 @@
-import { STRENGHT_J, GRAVITY, canvas, c } from "./index.js";
+import { STRENGHT_J, GRAVITY, canvas, c, player, enemy } from "./index.js";
+import { determineWinner, timerId } from "./animate.js";
 
 ///creating a sprite class
 export class Sprite {
@@ -130,7 +131,7 @@ export class Fighter extends Sprite {
 
   update() {
     //if the hitstop is on, doesn't update the animation loop
-    if(this.timeHitstop > 0){
+    if (this.timeHitstop > 0) {
       this.draw();
       this.timeHitstop--;
       return;
@@ -141,7 +142,8 @@ export class Fighter extends Sprite {
 
     // Ajusta a posição da attackBox com base no flip
     if (this.flip) {
-      this.attackBox.position.x = this.position.x - this.attackBox.offset.x - this.attackBox.width;
+      this.attackBox.position.x =
+        this.position.x - this.attackBox.offset.x - this.attackBox.width;
     } else {
       this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     }
@@ -210,7 +212,8 @@ export class Fighter extends Sprite {
   switchSprite(sprite) {
     if (this.image === this.sprites.death.image) {
       if (this.currentFrame === this.sprites.death.framesMax - 1)
-        this.death = true;
+        this.dead = true;
+      if (this.dead === true) determineWinner({ player, enemy, timerId }); //attack frame bug fix
       return;
     }
 

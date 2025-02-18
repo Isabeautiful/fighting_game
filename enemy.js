@@ -9,7 +9,7 @@ let hasAttacked = false;
 function enemyDeath(){
   if(enemy.health <= 0){
     enemy.switchSprite('death');
-    if(enemy.death === true || player.death === true){
+    if(enemy.dead === true || player.dead === true){
       determineWinner({ player, enemy, timerId })
     }
   }
