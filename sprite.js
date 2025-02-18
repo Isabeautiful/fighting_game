@@ -110,6 +110,8 @@ export class Fighter extends Sprite {
     this.framesHold = 5;
     this.flip = false;
 
+    this.timeHitstop = 0; //frames do hitstop
+
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
@@ -127,6 +129,13 @@ export class Fighter extends Sprite {
   }
 
   update() {
+    //if the hitstop is on, doesn't update the animation loop
+    if(this.timeHitstop > 0){
+      this.draw();
+      this.timeHitstop--;
+      return;
+    }
+
     this.draw();
     if (!this.dead) this.animateFrames();
 
