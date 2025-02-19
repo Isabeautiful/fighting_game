@@ -1,4 +1,4 @@
-import { OFFSET_C } from "./index.js";
+import { OFFSET_C } from "./game-control.js";
 
 export function rectangularCollision({ rectangle1, rectangle2 }) {
   return (

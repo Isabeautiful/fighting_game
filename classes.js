@@ -1,5 +1,10 @@
-import { STRENGHT_J, GRAVITY, canvas, c, player, enemy } from "./index.js";
-import { determineWinner, timerId } from "./animate.js";
+import { canvas, c, player, enemy } from "./index.js";
+import {
+  STRENGHT_J,
+  GRAVITY,
+  determineWinner,
+  timerId,
+} from "./game-control.js";
 
 ///creating a sprite class
 export class Sprite {

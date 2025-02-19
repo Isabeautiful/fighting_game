@@ -1,57 +1,10 @@
-import {
-  SPEED,
-  player,
-  enemy,
-  canvas,
-  background,
-  shop,
-  c,
-  isPaused,
-  pauseGame,
-  OFFSET_C,
-} from "./index.js";
+import { player, enemy, canvas, background, shop, c } from "./index.js";
 import { keys } from "./keys.js";
-import { rectangularCollision, handleAttackBoxOffset } from "./collision.js";
+import { rectangularCollision } from "./collision.js";
 import { enemyAI } from "./enemy.js";
+import { SPEED, isPaused, OFFSET_C } from "./game-control.js";
 
-export let timer = 60;
-export let timerId;
 const HITSTOP_TIME = 3;
-
-export function determineWinner({ player, enemy, timerId }) {
-  clearTimeout(timerId); //Stop the timer
-
-  let result = document.querySelector("#result");
-  result.style.display = "flex";
-
-  if (player.health === enemy.health) {
-    result.innerHTML = "Tie";
-  } else if (player.health > enemy.health) {
-    result.innerHTML = "Player Won";
-  } else {
-    result.innerHTML = "Enemy Won";
-  }
-
-  //Pausa o jogo quando ele termina
-  pauseGame(true);
-}
-
-export function decreaseTimer() {
-  if (isPaused) {
-    return;
-  }
-
-  if (timer > 0) {
-    timerId = setTimeout(decreaseTimer, 1000);
-    timer--;
-    document.querySelector("#timer").innerHTML = timer;
-  }
-
-  if (timer === 0) {
-    determineWinner({ player, enemy, timerId });
-  }
-}
-
 //animate the entire canvas
 export function animate() {
   window.requestAnimationFrame(animate);
@@ -140,7 +93,8 @@ export function animate() {
     player.timeHitstop = HITSTOP_TIME;
     enemy.timeHitstop = HITSTOP_TIME;
 
-    document.querySelector("#player-health-H").style.width = player.health + "%";
+    document.querySelector("#player-health-H").style.width =
+      player.health + "%";
   }
 
   //if enemy misses
@@ -150,8 +104,8 @@ export function animate() {
 
   //end the game based on health
   if (enemy.health <= 0 || player.health <= 0) {
-    if(enemy.health <= 0) enemy.switchSprite('death');
-    if(player.health <= 0) player.switchSprite('death');
+    if (enemy.health <= 0) enemy.switchSprite("death");
+    if (player.health <= 0) player.switchSprite("death");
   }
 
   // Flip sprite based on position relative to the other fighter

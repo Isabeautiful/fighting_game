@@ -1,23 +1,23 @@
-import { enemy, player, SPEED, STRENGHT_J } from "./index.js";
-import { timerId, determineWinner } from "./animate.js";
+import { enemy, player } from "./index.js";
+import { timerId, determineWinner, SPEED, STRENGHT_J } from "./game-control.js";
 
 const E_ATTACK_COOLDOWN_TIME = 1500; // 1.5s
 let DISTANCE_ARM = 170; //width of the attackbox
 let enemyAttackCooldown = 0; //Cooldown of the Attack
 let hasAttacked = false;
 
-function enemyDeath(){
-  if(enemy.health <= 0){
-    enemy.switchSprite('death');
-    if(enemy.dead === true || player.dead === true){
-      determineWinner({ player, enemy, timerId })
+function enemyDeath() {
+  if (enemy.health <= 0) {
+    enemy.switchSprite("death");
+    if (enemy.dead === true || player.dead === true) {
+      determineWinner({ player, enemy, timerId });
     }
   }
 }
 
 export function enemyAI() {
   const distanceToPlayer = player.position.x - enemy.position.x;
-  DISTANCE_ARM = - enemy.attackBox.offset.x + 1;
+  DISTANCE_ARM = -enemy.attackBox.offset.x + 1;
 
   enemyDeath();
   if (!enemy.dead) {

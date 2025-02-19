@@ -1,4 +1,5 @@
-import { player, pauseGame, isPaused } from "./index.js";
+import { player } from "./index.js";
+import { pauseGame, isPaused } from "./game-control.js";
 
 export const keys = {
   a: { pressed: false },
