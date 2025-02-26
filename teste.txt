@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      let t0 = 0;
+      let dt = 0;
+      let canvas = document.querySelector("canvas");
+      let ctx = canvas.getContext("2d");
+
+      let x = 200;
+      let vx = -20;
+      let ax = 0;
+      let imune = 2;
+      let ang = 0;
+      function passo(t) {
+        dt = (t - t0) / 1000;
+        vx += ax * dt;
+        x += vx * dt;
+        ctx.fillStyle = "lightgreen";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (imune >= 0) {
+          imune -= 1 * dt;
+          ang = 120;
+        } else {
+          ang = 0;
+        }
+        ctx.fillStyle = `hsl(${ang}deg, 100%, 50%)`;
+        ctx.fillRect(x, 100, 20, 20);
+        requestAnimationFrame(passo);
+
+        if (x <= 0) {
+          x = 0;
+        }
+        t0 = t;
+      }
+      requestAnimationFrame(passo);
+    </script>
+  </body>
+</html>
